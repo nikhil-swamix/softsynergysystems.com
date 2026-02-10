@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soft Synergy Systems | Enterprise Solutions</title>
+    
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            900: '#0c4a6e',
+                            dark: '#0f172a', // Slate 900
+                            darker: '#020617', // Slate 950
+                            accent: '#6366f1', // Indigo
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles & Utilities */
+        body {
+            background-color: #020617;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Utility */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(99, 102, 241, 0.5);
+            box-shadow: 0 20px 40px -10px rgba(99, 102, 241, 0.2);
+            transform: translateY(-5px);
+        }
+
+        /* Toast Notification Styles */
+        .toast-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 9998;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .toast-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+
+        .toast-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.95) 0%, rgba(2, 6, 23, 0.98) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 24px;
+            padding: 0;
+            max-width: 650px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            z-index: 9999;
+            box-shadow: 0 25px 80px -20px rgba(99, 102, 241, 0.4);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .toast-container.active {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .toast-header {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(14, 165, 233, 0.2) 100%);
+            padding: 24px 32px;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .toast-header h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 0;
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .toast-close {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .toast-close:hover {
+            background: rgba(239, 68, 68, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .toast-body {
+            padding: 32px;
+            color: #cbd5e1;
+            line-height: 1.8;
+        }
+
+        .toast-body h4 {
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 24px 0 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .toast-body h4:first-child {
+            margin-top: 0;
+        }
+
+        .toast-body ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toast-body ul li {
+            padding: 8px 0;
+            padding-left: 28px;
+            position: relative;
+            color: #94a3b8;
+        }
+
+        .toast-body ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #6366f1;
+            font-weight: bold;
+        }
+
+        .toast-body p {
+            margin-bottom: 16px;
+        }
+
+        .use-case-card {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(14, 165, 233, 0.1) 100%);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .use-case-card:hover {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(14, 165, 233, 0.15) 100%);
+            border-color: rgba(99, 102, 241, 0.4);
+            transform: translateX(4px);
+        }
+
+        .use-case-card h5 {
+            color: #38bdf8;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin: 0 0 8px;
+        }
+
+        .use-case-card p {
+            margin: 0;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .tag {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(14, 165, 233, 0.2) 100%);
+            color: #818cf8;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin: 4px;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        /* Custom scrollbar for toast */
+        .toast-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .toast-container::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.5);
+        }
+
+        .toast-container::-webkit-scrollbar-thumb {
+            background: rgba(99, 102, 241, 0.5);
+            border-radius: 4px;
+        }
+
+        .toast-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(99, 102, 241, 0.7);
+        }
+
+        /* Gradient Text */
+        .text-gradient {
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Canvas Background */
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569; 
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Navbar -->
+    <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 border-b border-transparent">
+        <div class="container mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-brand-500/20 group-hover:shadow-brand-500/40 transition-all">
+                    S
+                </div>
+                <span class="text-xl font-display font-bold tracking-tight text-white group-hover:text-brand-400 transition-colors">Soft Synergy</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="#home" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Home</a>
+                <a href="#about" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">About</a>
+                <a href="/services.html" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Services</a>
+                <a href="#contact" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Contact</a>
+                <a href="#contact" class="px-5 py-2.5 rounded-full bg-white text-brand-dark font-semibold text-sm hover:bg-brand-50 transition-all transform hover:scale-105 shadow-lg shadow-white/10">
+                    Get Started
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-white text-2xl focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden absolute top-20 left-0 w-full bg-brand-darker border-b border-white/10 md:hidden backdrop-blur-xl">
+            <div class="flex flex-col p-6 gap-4">
+                <a href="#home" class="text-slate-300 hover:text-brand-400 py-2">Home</a>
+                <a href="#about" class="text-slate-300 hover:text-brand-400 py-2">About</a>
+                <a href="/services.html" class="text-slate-300 hover:text-brand-400 py-2">Services</a>
+                <a href="#contact" class="text-slate-300 hover:text-brand-400 py-2">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section with Canvas Animation -->
+    <section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+        <!-- Canvas for Network Animation -->
+        <canvas id="hero-canvas"></canvas>
+        
+        <!-- Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-brand-dark/50 to-brand-darker z-0 pointer-events-none"></div>
+
+        <div class="container mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+            <div class="text-center lg:text-left reveal active">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-500/30 bg-brand-500/10 mb-6 backdrop-blur-sm">
+                    <span class="w-2 h-2 rounded-full bg-brand-400 animate-pulse"></span>
+                    <span class="text-xs font-medium text-brand-300 uppercase tracking-wider">Future Ready Technology</span>
+                </div>
+                <h1 class="text-5xl lg:text-7xl font-display font-bold leading-tight mb-6">
+                    Innovating for a <br>
+                    <span class="text-gradient">Digital Era</span>
+                </h1>
+                <p class="text-lg text-slate-400 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                    Soft Synergy Systems empowers global enterprises with cutting-edge AI, automation, and data solutions. We bridge the gap between complex technology and business success.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <a href="https://wa.me/9790823800?text=i%20would%20like%20to%20know%20more%20about%20soft%20synergy%20systems" target="_blank" rel="noopener noreferrer" class="px-8 py-4 rounded-full bg-gradient-to-r from-brand-600 to-brand-400 text-white font-semibold shadow-lg shadow-brand-500/25 hover:shadow-brand-500/50 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        Contact Now
+                    </a>
+                    <a href="#services" class="px-8 py-4 rounded-full border border-slate-700 text-white font-semibold hover:bg-white/5 transition-all backdrop-blur-sm flex items-center justify-center gap-2">
+                        Explore Services <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+                
+                <div class="mt-12 flex items-center gap-6 justify-center lg:justify-start text-slate-500 text-sm">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-check-circle text-brand-500"></i> ISO Certified
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-check-circle text-brand-500"></i> 24/7 Support
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Visual -->
+            <div class="relative hidden lg:block h-[600px] reveal delay-200">
+                <!-- Decorative Blobs -->
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-500/20 rounded-full blur-[100px] animate-pulse"></div>
+                
+                <!-- Floating Cards -->
+                <div class="absolute top-20 right-10 glass-card p-6 rounded-2xl w-64 animate-float z-20">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-400">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400">Growth</p>
+                            <h4 class="text-lg font-bold text-white">+145%</h4>
+                        </div>
+                    </div>
+                    <div class="h-1 w-full bg-slate-700 rounded-full overflow-hidden">
+                        <div class="h-full bg-green-400 w-3/4"></div>
+                    </div>
+                </div>
+
+                <div class="absolute bottom-32 left-0 glass-card p-6 rounded-2xl w-72 animate-float z-30" style="animation-delay: 2s;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <i class="fa-solid fa-robot text-brand-400 text-2xl"></i>
+                        <span class="text-white font-medium">AI Integration</span>
+                    </div>
+                    <p class="text-xs text-slate-400">Automating complex workflows with neural networks.</p>
+                </div>
+
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 border border-brand-500/30 rounded-full animate-spin-slow"></div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-60 h-60 border border-brand-400/30 rounded-full animate-spin-slow" style="direction: reverse;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee / Partners -->
+    <div class="border-y border-white/5 bg-black/20 py-8 overflow-hidden relative z-20">
+        <div class="flex animate-[marquee_20s_linear_infinite] w-max gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+            <!-- Repeated Logos for effect -->
+            <span class="text-2xl font-display font-bold text-white tracking-tighter">FINTECH<span class="text-brand-500">CORP</span></span>
+            <span class="text-2xl font-display font-bold text-white tracking-tighter">DATA<span class="text-brand-500">SYSTEMS</span></span>
+            <span class="text-2xl font-display font-bold text-white tracking-tighter">LOGISTICS<span class="text-brand-500">PRO</span></span>
+            <span class="text-2xl font-display font-bold text-white tracking-tighter">TELECOM<span class="text-brand-500">GLOBAL</span></span>
+            <span class="text-2xl font-display font-bold text-white tracking-tighter">BANK<span class="text-brand-500">SECURE</span></span>
+            <span class="text-2xl font-display font-bold text-white tracking-tighter">FINTECH<span class="text-brand-500">CORP</span></span>
+            <span class="text-2xl font-display font-bold text-white tracking-tighter">DATA<span class="text-brand-500">SYSTEMS</span></span>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 relative">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="relative reveal">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-brand-500 to-purple-600 rounded-2xl blur-lg opacity-30"></div>
+                    <img src="https://picsum.photos/seed/2/800/600" alt="Modern Office" class="relative rounded-2xl shadow-2xl border border-white/10 grayscale hover:grayscale-0 transition-all duration-700">
+                </div>
+                
+                <div class="reveal delay-100">
+                    <h4 class="text-brand-400 font-semibold tracking-wide uppercase mb-4">Who We Are</h4>
+                    <h2 class="text-4xl lg:text-5xl font-display font-bold text-white mb-6">Global Leaders in <br><span class="text-gradient">IT Services</span></h2>
+                    <p class="text-slate-400 mb-6 leading-relaxed">
+                        Soft Synergy Systems is focused on providing premium Information Technology Services for Banking, Financial Services, Telecom, Logistics & Transportation. We are the preferred and innovative provider of IT Services, driven by the most appropriate and up-to-date technology, systems, and processes.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-brand-900/50 flex items-center justify-center text-brand-400 shrink-0">
+                                <i class="fa-solid fa-bullseye text-xl"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-white font-bold mb-1">Our Vision</h5>
+                                <p class="text-sm text-slate-500">To be a global leader in digital transformation.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-brand-900/50 flex items-center justify-center text-brand-400 shrink-0">
+                                <i class="fa-solid fa-handshake text-xl"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-white font-bold mb-1">Our Mission</h5>
+                                <p class="text-sm text-slate-500">Empowering partners through innovative synergy.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us (Features Grid) -->
+    <section class="py-24 bg-brand-dark/50 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h4 class="text-brand-400 font-semibold tracking-wide uppercase mb-2">Why Choose Us</h4>
+                <h2 class="text-3xl lg:text-4xl font-display font-bold text-white">Your Partner in <span class="text-gradient">Success</span></h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Feature 1 -->
+                <div class="glass-card p-8 rounded-2xl reveal">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/20 flex items-center justify-center mb-6 border border-blue-500/20">
+                        <i class="fa-solid fa-user-astronaut text-2xl text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Distinctive Experts</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Effortless expertise provided by professionals who understand the nuances of enterprise needs.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="glass-card p-8 rounded-2xl reveal delay-100">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-600/20 flex items-center justify-center mb-6 border border-purple-500/20">
+                        <i class="fa-solid fa-lightbulb text-2xl text-purple-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Exceptional Ideas</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Wide-ranging thoughts breed exceptional ideas that drive business innovation.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="glass-card p-8 rounded-2xl reveal delay-200">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-500/20 to-emerald-600/20 flex items-center justify-center mb-6 border border-emerald-500/20">
+                        <i class="fa-solid fa-chart-pie text-2xl text-emerald-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Valuable Insights</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Extensive marketing research generates actionable insights for growth.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="glass-card p-8 rounded-2xl reveal">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-pink-500/20 to-pink-600/20 flex items-center justify-center mb-6 border border-pink-500/20">
+                        <i class="fa-solid fa-comments text-2xl text-pink-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Open Communication</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Generating best results through transparent and constant collaboration.</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="glass-card p-8 rounded-2xl reveal delay-100">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-orange-500/20 to-orange-600/20 flex items-center justify-center mb-6 border border-orange-500/20">
+                        <i class="fa-solid fa-microchip text-2xl text-orange-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Enriched Outcomes</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Enabled by experienced professionals dedicated to quality delivery.</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="glass-card p-8 rounded-2xl reveal delay-200">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 flex items-center justify-center mb-6 border border-cyan-500/20">
+                        <i class="fa-solid fa-flag-checkered text-2xl text-cyan-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Results Driven</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">We are oriented around deliverables. We deliver tangible results.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-brand-accent/10 to-transparent pointer-events-none"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+                <div class="max-w-2xl">
+                    <h4 class="text-brand-accent font-semibold tracking-wide uppercase mb-2">Our Expertise</h4>
+                    <h2 class="text-3xl lg:text-4xl font-display font-bold text-white">Comprehensive <br><span class="text-gradient">Solutions</span></h2>
+                </div>
+                <a href="#contact" class="hidden md:inline-flex items-center gap-2 text-white font-medium hover:text-brand-accent transition-colors mt-4 md:mt-0">
+                    View All Services <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service Card 1: Python & AI Developments -->
+                <a href="/services/python-ai.html" class="group block reveal">
+                    <div class="glass-card p-8 rounded-2xl h-full hover:bg-brand-900/40">
+                        <div class="mb-6 flex justify-between items-start">
+                            <i class="fa-solid fa-brain text-4xl text-brand-500 group-hover:text-white transition-colors duration-300"></i>
+                            <i class="fa-solid fa-info-circle text-slate-600 group-hover:text-brand-400 transition-all duration-300"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-brand-400 transition-colors">Python & AI Developments</h3>
+                        <p class="text-slate-400 text-sm">Cutting-edge AI solutions powered by Python for intelligent automation and data-driven insights.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="tag">Machine Learning</span>
+                            <span class="tag">RAG Systems</span>
+                            <span class="tag">AI Voice Agents</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Service Card 2: QA Services -->
+                <a href="/services/qa.html" class="group block reveal delay-100">
+                    <div class="glass-card p-8 rounded-2xl h-full hover:bg-brand-900/40">
+                        <div class="mb-6 flex justify-between items-start">
+                            <i class="fa-solid fa-shield-halved text-4xl text-emerald-500 group-hover:text-white transition-colors duration-300"></i>
+                            <i class="fa-solid fa-info-circle text-slate-600 group-hover:text-emerald-400 transition-all duration-300"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors">QA Services</h3>
+                        <p class="text-slate-400 text-sm">Comprehensive end-to-end testing solutions ensuring flawless software delivery and reliability.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="tag">E2E Testing</span>
+                            <span class="tag">Automation</span>
+                            <span class="tag">Performance</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Service Card 3: JAVA Development -->
+                <a href="/services/java.html" class="group block reveal delay-200">
+                    <div class="glass-card p-8 rounded-2xl h-full hover:bg-brand-900/40">
+                        <div class="mb-6 flex justify-between items-start">
+                            <i class="fa-brands fa-java text-4xl text-orange-500 group-hover:text-white transition-colors duration-300"></i>
+                            <i class="fa-solid fa-info-circle text-slate-600 group-hover:text-orange-400 transition-all duration-300"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-orange-400 transition-colors">JAVA Development</h3>
+                        <p class="text-slate-400 text-sm">Enterprise-grade Java solutions with outsourcing models and global capability centers.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="tag">Spring Boot</span>
+                            <span class="tag">Microservices</span>
+                            <span class="tag">Outsourcing</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="mt-8 text-center md:hidden">
+                <a href="#contact" class="inline-block text-brand-accent font-medium">View All Services <i class="fa-solid fa-arrow-right ml-1"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 border-y border-white/5 bg-gradient-to-r from-brand-darker to-brand-dark">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center divide-x divide-white/5">
+                <div class="reveal">
+                    <div class="text-4xl font-display font-bold text-white mb-2">500+</div>
+                    <div class="text-sm text-slate-400 uppercase tracking-wider">Projects Delivered</div>
+                </div>
+                <div class="reveal delay-100">
+                    <div class="text-4xl font-display font-bold text-white mb-2">50+</div>
+                    <div class="text-sm text-slate-400 uppercase tracking-wider">Global Partners</div>
+                </div>
+                <div class="reveal delay-200">
+                    <div class="text-4xl font-display font-bold text-white mb-2">10+</div>
+                    <div class="text-sm text-slate-400 uppercase tracking-wider">Years Experience</div>
+                </div>
+                <div class="reveal delay-300">
+                    <div class="text-4xl font-display font-bold text-white mb-2">24/7</div>
+                    <div class="text-sm text-slate-400 uppercase tracking-wider">Support Active</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials (Simplified) -->
+    <section class="py-20 text-center">
+        <div class="container mx-auto px-6 reveal">
+            <i class="fa-solid fa-quote-left text-4xl text-brand-500/20 mb-6"></i>
+            <h3 class="text-2xl md:text-3xl font-display font-bold text-white max-w-3xl mx-auto mb-6">
+                "Discover our satisfied customers' reviews! Success stories coming soon."
+            </h3>
+            <div class="flex justify-center gap-1">
+                <i class="fa-solid fa-star text-brand-500"></i>
+                <i class="fa-solid fa-star text-brand-500"></i>
+                <i class="fa-solid fa-star text-brand-500"></i>
+                <i class="fa-solid fa-star text-brand-500"></i>
+                <i class="fa-solid fa-star text-brand-500"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-brand-dark relative">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-0 rounded-3xl overflow-hidden shadow-2xl shadow-brand-900/50 border border-white/10 reveal">
+                <!-- Info Side -->
+                <div class="bg-gradient-to-br from-brand-900 to-brand-darker p-10 lg:p-16 text-white flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-3xl font-display font-bold mb-6">Get in Touch</h3>
+                        <p class="text-slate-400 mb-10">Have a project in mind? We know that our clients have unique needs. Send us a message.</p>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-brand-400 shrink-0 mt-1">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold mb-1">Headquarters</h5>
+                                    <p class="text-sm text-slate-400">26/3, Thirumenahalli Main Road, Block 3,<br>Chokkanahalli, Bengaluru, Karnataka, India</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-brand-400 shrink-0 mt-1">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold mb-1">Email Us</h5>
+                                    <p class="text-sm text-slate-400">hr@softsynergysystems.com</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-brand-400 shrink-0 mt-1">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold mb-1">Call Us</h5>
+                                    <p class="text-sm text-slate-400">+91 82964-53365</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 pt-8 border-t border-white/10">
+                        <div class="text-sm text-slate-500 mb-4">Follow Us</div>
+                        <div class="flex gap-4">
+                            <a href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-brand-500 hover:text-white flex items-center justify-center transition-all border border-white/10 text-slate-300">
+                                <i class="fa-brands fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-brand-500 hover:text-white flex items-center justify-center transition-all border border-white/10 text-slate-300">
+                                <i class="fa-brands fa-twitter"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-brand-500 hover:text-white flex items-center justify-center transition-all border border-white/10 text-slate-300">
+                                <i class="fa-brands fa-facebook-f"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Side -->
+                <div class="bg-brand-darker p-10 lg:p-16">
+                    <form onsubmit="event.preventDefault(); alert('Thank you! We will contact you shortly.');" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">First Name</label>
+                                <input type="text" class="w-full bg-brand-dark border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all placeholder-slate-600" placeholder="John">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Last Name</label>
+                                <input type="text" class="w-full bg-brand-dark border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all placeholder-slate-600" placeholder="Doe">
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-2">
+                            <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Email</label>
+                            <input type="email" class="w-full bg-brand-dark border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all placeholder-slate-600" placeholder="john@company.com">
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Service Interest</label>
+                            <select class="w-full bg-brand-dark border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all">
+                                <option>AI Solutions</option>
+                                <option>Web Development</option>
+                                <option>Consulting</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Message</label>
+                            <textarea rows="4" class="w-full bg-brand-dark border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all placeholder-slate-600" placeholder="Tell us about your project..."></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-gradient-to-r from-brand-600 to-brand-accent text-white font-bold py-4 rounded-lg hover:shadow-lg hover:shadow-brand-500/30 transition-all transform hover:-translate-y-1">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-white/5 pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <a href="#" class="text-2xl font-display font-bold text-white mb-4 block">Soft Synergy</a>
+                    <p class="text-slate-500 text-sm leading-relaxed mb-6">Innovative provider and manager of IT Services driven by appropriate technology.</p>
+                </div>
+                
+                <div>
+                    <h5 class="text-white font-bold mb-4">Company</h5>
+                    <ul class="space-y-2 text-sm text-slate-500">
+                        <li><a href="#about" class="hover:text-brand-400 transition-colors">About Us</a></li>
+                        <li><a href="/services.html" class="hover:text-brand-400 transition-colors">Services</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Careers</a></li>
+                        <li><a href="#contact" class="hover:text-brand-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="text-white font-bold mb-4">Services</h5>
+                    <ul class="space-y-2 text-sm text-slate-500">
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Artificial Intelligence</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Industrial Automation</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Data Analysis</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Cloud Solutions</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="text-white font-bold mb-4">Legal</h5>
+                    <ul class="space-y-2 text-sm text-slate-500">
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-slate-600 text-xs text-center md:text-left">Copyright © 2025 Soft Synergy Systems - All Rights Reserved.</p>
+                <p class="text-slate-600 text-xs">Designed for Excellence.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/9790823800"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="fixed bottom-4 right-4 w-12 h-12 md:bottom-6 md:right-6 md:w-14 md:h-14 bg-[#25D366] rounded-full flex items-center justify-center text-white shadow-lg shadow-[#25D366]/30 hover:bg-[#20bd5a] hover:scale-110 transition-all z-[9999]">
+        <i class="fa-brands fa-whatsapp text-xl md:text-2xl"></i>
+    </a>
+
+    <!-- Toast Notification -->
+    <div class="toast-overlay" id="toastOverlay"></div>
+    <div class="toast-container" id="toastContainer">
+        <div class="toast-header">
+            <h3 id="toastTitle">Service Details</h3>
+            <button class="toast-close" id="toastClose">
+                <i class="fa-solid fa-times"></i>
+            </button>
+        </div>
+        <div class="toast-body" id="toastBody">
+            <!-- Dynamic content will be inserted here -->
+        </div>
+    </div>
+
+    <!-- JavaScript logic -->
+    <script>
+        // --- 1. Mobile Menu Logic ---
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const nav = document.getElementById('navbar');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-brand-darker/90', 'backdrop-blur-md', 'border-white/10');
+                nav.classList.remove('border-transparent');
+            } else {
+                nav.classList.remove('bg-brand-darker/90', 'backdrop-blur-md', 'border-white/10');
+                nav.classList.add('border-transparent');
+            }
+        });
+
+        // --- 2. Scroll Reveal Animation ---
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // --- 3. Hero Canvas Animation (Constellation Effect) ---
+        const canvas = document.getElementById('hero-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+
+        // Configuration
+        const particleCount = 60; // Adjust for density
+        const connectionDistance = 150;
+        const mouseDistance = 200;
+
+        // Mouse tracking
+        let mouse = { x: null, y: null };
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+        });
+        window.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
+                this.color = '#38bdf8'; // Sky blue
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Bounce off edges
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+
+                // Mouse interaction
+                if (mouse.x != null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouseDistance) {
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const force = (mouseDistance - distance) / mouseDistance;
+                        const directionX = forceDirectionX * force * 0.5;
+                        const directionY = forceDirectionY * force * 0.5;
+                        this.x -= directionX;
+                        this.y -= directionY;
+                    }
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        function initCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            particles = [];
+            
+            // Responsive particle count
+            let count = window.innerWidth < 768 ? 30 : particleCount;
+            
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, width, height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                // Draw connections
+                for (let j = i; j < particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let distance = Math.sqrt(dx*dx + dy*dy);
+
+                    if (distance < connectionDistance) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(56, 189, 248, ${1 - distance/connectionDistance})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateCanvas);
+        }
+
+        window.addEventListener('resize', initCanvas);
+        initCanvas();
+        animateCanvas();
+
+        // --- 4. Toast Notification System ---
+        const serviceData = {
+            'python-ai': {
+                title: 'Python & AI Developments',
+                content: `
+                    <p>We specialize in building intelligent AI solutions using Python's powerful ecosystem, from machine learning models to sophisticated AI agents that transform your business operations.</p>
+
+                    <h4>🤖 AI & Machine Learning Solutions</h4>
+                    <div class="use-case-card">
+                        <h5>RAG (Retrieval-Augmented Generation) Systems</h5>
+                        <p>Build intelligent knowledge bases that combine language models with your proprietary data for accurate, context-aware responses in customer support, research, and internal knowledge management.</p>
+                    </div>
+                    <div class="use-case-card">
+                        <h5>AI Voice Calling Agents</h5>
+                        <p>Deploy autonomous voice agents for customer service, appointment scheduling, and lead qualification. Our AI agents handle natural conversations, reducing call center costs by up to 60% while improving customer satisfaction.</p>
+                    </div>
+                    <div class="use-case-card">
+                        <h5>Predictive Analytics & Forecasting</h5>
+                        <p>Leverage machine learning to predict market trends, customer behavior, and operational needs. Build models that help you make data-driven decisions and stay ahead of competitors.</p>
+                    </div>
+
+                    <h4>🚀 Python Development Services</h4>
+                    <ul>
+                        <li>Django & Flask web applications</li>
+                        <li>FastAPI for high-performance APIs</li>
+                        <li>Data processing pipelines with Pandas & NumPy</li>
+                        <li>Computer Vision solutions with OpenCV</li>
+                        <li>Natural Language Processing (NLP) applications</li>
+                        <li>Automation scripts for business workflows</li>
+                    </ul>
+
+                    <h4>💼 Industry Use Cases</h4>
+                    <div class="use-case-card">
+                        <h5>Healthcare</h5>
+                        <p>AI-powered diagnostic tools, patient monitoring systems, and medical image analysis for faster, more accurate diagnoses.</p>
+                    </div>
+                    <div class="use-case-card">
+                        <h5>Finance</h5>
+                        <p>Fraud detection, algorithmic trading, credit risk assessment, and automated financial reporting.</p>
+                    </div>
+                    <div class="use-case-card">
+                        <h5>E-commerce</h5>
+                        <p>Product recommendation engines, dynamic pricing, chatbots, and inventory optimization systems.</p>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <span class="tag">TensorFlow</span>
+                        <span class="tag">PyTorch</span>
+                        <span class="tag">LangChain</span>
+                        <span class="tag">OpenAI</span>
+                        <span class="tag">Azure AI</span>
+                        <span class="tag">Google AI</span>
+                    </div>
+                `
+            },
+            'qa': {
+                title: 'QA Services',
+                content: `
+                    <p>Our comprehensive Quality Assurance services ensure your software meets the highest standards of performance, security, and reliability before reaching production.</p>
+
+                    <h4>🧪 End-to-End Testing Solutions</h4>
+                    <div class="use-case-card">
+                        <h5>Automated Testing</h5>
+                        <p>Reduce testing time by 70% with robust automation frameworks using Selenium, Cypress, and Appium. We create maintainable test suites that provide continuous feedback throughout development cycles.</p>
+                    </div>
+                    <div class="use-case-card">
+                        <h5>Performance & Load Testing</h5>
+                        <p>Ensure your applications handle peak traffic with JMeter and Gatling. We identify bottlenecks, optimize response times, and verify scalability under stress conditions.</p>
+                    </div>
+                    <div class="use-case-card">
+                        <h5>Security Testing</h5>
+                        <p>Comprehensive vulnerability assessments including OWASP Top 10 testing, penetration testing, and code security reviews to protect your applications from threats.</p>
+                    </div>
+
+                    <h4>✅ Comprehensive QA Services</h4>
+                    <ul>
+                        <li><strong>Functional Testing:</strong> Unit, integration, and system testing</li>
+                        <li><strong>API Testing:</strong> RESTful API validation with Postman & Newman</li>
+                        <li><strong>Mobile Testing:</strong> iOS & Android app testing on real devices</li>
+                        <li><strong>Cross-Browser Testing:</strong> Compatibility across all major browsers</li>
+                        <li><strong>Usability Testing:</strong> User experience validation and accessibility</li>
+                        <li><strong>Regression Testing:</strong> Ensure new features don't break existing functionality</li>
+                        <li><strong>Compatibility Testing:</strong> Verify performance across devices and OS versions</li>
+                    </ul>
+
+                    <h4>🎯 Industry-Specific Testing</h4>
+                    <div class="use-case-card">
+                        <h5>Banking & Fintech</h5>
+                        <p>Rigorous compliance testing for PCI DSS, GDPR, and financial regulations. Transaction integrity testing and fraud prevention system validation.</p>
+                    </div>
+                    <div class="use-case-card">
+                        <h5>Healthcare</h5>
+                        <p>HIPAA compliance testing, patient data privacy validation, and EMR system testing for healthcare applications.</p>
+                    </div>
+                    <div class="use-case-card">
+                        <h5>E-commerce</h5>
+                        <p>Payment gateway testing, shopping cart validation, inventory system verification, and high-traffic load testing for sale events.</p>
+                    </div>
+
+                    <h4>📊 QA Metrics & Reporting</h4>
+                    <ul>
+                        <li>Real-time test execution dashboards</li>
+                        <li>Detailed defect tracking and reporting</li>
+                        <li>Test coverage analysis and improvement recommendations</li>
+                        <li>CI/CD pipeline integration with automated test execution</li>
+                        <li>Performance benchmarking and trend analysis</li>
+                    </ul>
+
+                    <div style="margin-top: 20px;">
+                        <span class="tag">Selenium</span>
+                        <span class="tag">Cypress</span>
+                        <span class="tag">Appium</span>
+                        <span class="tag">JMeter</span>
+                        <span class="tag">Postman</span>
+                        <span class="tag">OWASP ZAP</span>
+                    </div>
+                `
+            },
+            'java': {
+                title: 'JAVA Development',
+                content: `
+                    <p>Leverage our enterprise-grade Java development expertise to build scalable, secure, and high-performance applications. With our outsourcing models and Global Capability Centers (GCCs), we deliver world-class Java solutions at competitive costs.</p>
+
+                    <h4>☕ Enterprise Java Development</h4>
+                    <div class="use-case-card">
+                        <h5>Spring Boot Microservices</h5>
+                        <p>Build cloud-native microservices architecture with Spring Boot, Spring Cloud, and Kubernetes. Create scalable, resilient services that handle millions of requests with ease.</p>
+                    </div>
+                    <div class="use-case-card">
+                        <h5>Enterprise Application Development</h5>
+                        <p>Large-scale applications using Java EE, Jakarta EE, and modern frameworks. Perfect for banking, insurance, and enterprise resource planning systems.</p>
+                    </div>
+                    <div class="use-case-card">
+                        <h5>Legacy System Modernization</h5>
+                        <p>Transform monolithic applications into modern microservices or serverless architectures. We migrate legacy systems while maintaining business continuity.</p>
+                    </div>
+
+                    <h4>🌍 Outsourcing & Global Capability Centers</h4>
+                    <ul>
+                        <li><strong>Dedicated Development Teams:</strong> Full-time developers committed to your projects</li>
+                        <li><strong>Staff Augmentation:</strong> Scale your team with skilled Java developers on-demand</li>
+                        <li><strong>Offshore Development Centers:</strong> Cost-effective development teams in strategic locations</li>
+                        <li><strong>Global Capability Centers (GCCs):</strong> End-to-end development centers aligned with your business objectives</li>
+                        <li><strong>24/7 Development Cycles:</strong> Round-the-clock development for faster time-to-market</li>
+                        <li><strong>Flexible Engagement Models:</strong> Fixed-price, time & material, or outcome-based models</li>
+                    </ul>
+
+                    <h4>🏭 Industry Solutions</h4>
+                    <div class="use-case-card">
+                        <h5>Banking & Financial Services</h5>
+                        <p>High-frequency trading platforms, payment gateways, core banking systems, and regulatory compliance applications meeting Basel III, MiFID II, and other financial standards.</p>
+                    </div>
+                    <div class="use-case-card">
+                        <h5>Insurance</h5>
+                        <p>Policy administration systems, claims management platforms, actuarial calculation engines, and insurance CRM solutions.</p>
+                    </div>
+                    <div class="use-case-card">
+                        <h5>Telecommunications</h5>
+                        <p>BSS/OSS systems, network management platforms, customer billing systems, and real-time communication applications.</p>
+                    </div>
+                    <div class="use-case-card">
+                        <h5>Logistics & Supply Chain</h5>
+                        <p>Fleet management systems, warehouse automation, route optimization engines, and supply chain visibility platforms.</p>
+                    </div>
+
+                    <h4>🔒 Java Security & Compliance</h4>
+                    <ul>
+                        <li>OWASP security best practices implementation</li>
+                        <li>SAML/OAuth/JWT authentication & authorization</li>
+                        <li>Encryption and secure data handling</li>
+                        <li>PCI DSS, HIPAA, GDPR compliance implementations</li>
+                        <li>Code security audits and vulnerability scanning</li>
+                    </ul>
+
+                    <h4>⚡ Performance Optimization</h4>
+                    <ul>
+                        <li>JVM tuning and garbage collection optimization</li>
+                        <li>Multi-threading and concurrent programming</li>
+                        <li>Caching strategies with Redis, Hazelcast</li>
+                        <li>Database query optimization and indexing</li>
+                        <li>Load testing and performance benchmarking</li>
+                    </ul>
+
+                    <div style="margin-top: 20px;">
+                        <span class="tag">Spring Boot</span>
+                        <span class="tag">Microservices</span>
+                        <span class="tag">Hibernate</span>
+                        <span class="tag">Java EE</span>
+                        <span class="tag">Maven</span>
+                        <span class="tag">Gradle</span>
+                        <span class="tag">Docker</span>
+                        <span class="tag">Kubernetes</span>
+                    </div>
+                `
+            }
+        };
+
+        // Toast functionality
+        const toastOverlay = document.getElementById('toastOverlay');
+        const toastContainer = document.getElementById('toastContainer');
+        const toastTitle = document.getElementById('toastTitle');
+        const toastBody = document.getElementById('toastBody');
+        const toastClose = document.getElementById('toastClose');
+
+        // Open toast
+        function openToast(serviceKey) {
+            const service = serviceData[serviceKey];
+            if (!service) return;
+
+            toastTitle.textContent = service.title;
+            toastBody.innerHTML = service.content;
+
+            toastOverlay.classList.add('active');
+            toastContainer.classList.add('active');
+
+            // Prevent body scroll
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close toast
+        function closeToast() {
+            toastOverlay.classList.remove('active');
+            toastContainer.classList.remove('active');
+
+            // Restore body scroll
+            document.body.style.overflow = '';
+        }
+
+        // Event listeners for service cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const serviceKey = card.getAttribute('data-service');
+                openToast(serviceKey);
+            });
+        });
+
+        // Close button click
+        toastClose.addEventListener('click', closeToast);
+
+        // Click outside to close
+        toastOverlay.addEventListener('click', (e) => {
+            if (e.target === toastOverlay) {
+                closeToast();
+            }
+        });
+
+        // Escape key to close
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && toastContainer.classList.contains('active')) {
+                closeToast();
+            }
+        });
+
+    </script>
+</body>
+</html>
