@@ -86,6 +86,19 @@
                 transform: translateY(-5px);
             }
 
+            /* Enhanced Card Hover Interactions */
+            .choose-card:hover {
+                transform: translateY(-8px);
+                border: 1px solid rgba(0, 180, 255, 0.35);
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+            }
+
+            .featured-card:hover {
+                transform: translateY(-8px) scale(1.02);
+                border: 1px solid rgba(249, 115, 22, 0.4);
+                box-shadow: 0 25px 60px rgba(249, 115, 22, 0.25);
+            }
+
             /* Removed unused toast styles */
             .tag {
                 display: inline-block;
@@ -203,7 +216,7 @@
             <div class="container mx-auto px-6 h-20 flex items-center justify-between">
                 <a href="#main-content" aria-label="Soft Synergy Systems - Home" class="flex items-center gap-3 group">
                     <img src="/logo.png" alt="Soft Synergy Systems Logo" class="h-12 w-auto object-contain">
-                    <span class="text-xl font-display font-bold tracking-tight text-white group-hover:text-brand-400 transition-colors">Soft Synergy</span>
+                    <span class="text-xl font-display font-bold tracking-tight text-white group-hover:text-brand-400 transition-colors"></span>
                 </a>
 
                 <!-- Desktop Menu -->
@@ -367,66 +380,150 @@
 
         <!-- Why Choose Us (Features Grid) -->
         <section class="py-24 bg-brand-dark/50 relative">
+            <!-- Trust Layer -->
             <div class="container mx-auto px-6">
+                <div class="flex flex-wrap justify-center gap-6 mb-12 reveal">
+                    <div class="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10">
+                        <i class="fa-solid fa-shield-halved text-brand-400"></i>
+                        <span class="text-xs text-slate-400">Secure by Design</span>
+                    </div>
+                    <div class="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10">
+                        <i class="fa-solid fa-user-shield text-emerald-400"></i>
+                        <span class="text-xs text-slate-400">Privacy First</span>
+                    </div>
+                    <div class="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10">
+                        <i class="fa-solid fa-briefcase text-orange-400"></i>
+                        <span class="text-xs text-slate-400">FinTech Ready</span>
+                    </div>
+                    <div class="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10">
+                        <i class="fa-solid fa-building-columns text-purple-400"></i>
+                        <span class="text-xs text-slate-400">150+ Projects Delivered</span>
+                    </div>
+                </div>
+                
                 <div class="text-center max-w-3xl mx-auto mb-16 reveal">
                     <h4 class="text-brand-400 font-semibold tracking-wide uppercase mb-2">Why Choose Us</h4>
-                    <h2 class="text-3xl lg:text-4xl font-display font-bold text-white">Enterprise-Grade <span class="text-gradient">Delivery</span></h2>
+                    <h2 class="text-3xl lg:text-4xl font-display font-bold text-white">Enterprise Delivery <span class="text-gradient">Without Compromise</span></h2>
+                    <p class="text-slate-400 mt-4">Security. Speed. Accountability. Measurable ROI.</p>
                 </div>
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <!-- Feature 1: ROI Focus -->
-                    <div class="glass-card p-8 rounded-2xl reveal">
-                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/20 flex items-center justify-center mb-6 border border-blue-500/20">
-                            <i class="fa-solid fa-chart-line text-2xl text-blue-400"></i>
+                    <div class="glass-card p-8 rounded-2xl reveal choose-card group">
+                        <div class="w-14 h-14 rounded-xl bg-blue-500/20 flex items-center justify-center mb-6 border border-blue-500/30 group-hover:border-blue-400/50 transition-all">
+                            <i class="fa-solid fa-chart-line text-2xl text-blue-400 group-hover:text-blue-300 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all duration-300"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-3">ROI-Focused Solutions</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">Every solution is measured against business KPIs. We optimize TCO, accelerate time-to-value, and deliver measurable ROI through technology investments that directly impact your bottom line and operational efficiency.</p>
+                        <h3 class="text-xl font-bold text-white mb-2">📈 Measurable ROI</h3>
+                        <p class="text-slate-400 text-sm mb-4">Technology investments that deliver real returns.</p>
+                        <ul class="text-slate-300 text-sm space-y-2 mb-4">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-400 text-xs"></i> KPI-driven delivery model</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-400 text-xs"></i> Faster time-to-market</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-400 text-xs"></i> Reduced operational costs</li>
+                        </ul>
+                        <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                            <span class="text-blue-400 font-semibold text-sm">✔ Avg ROI: 30–45%</span>
+                            <span class="opacity-0 group-hover:opacity-100 text-sm text-white/70 transition-opacity">Learn how →</span>
+                        </div>
                     </div>
 
                     <!-- Feature 2: SLAs & Speed -->
-                    <div class="glass-card p-8 rounded-2xl reveal delay-100">
-                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-600/20 flex items-center justify-center mb-6 border border-purple-500/20">
-                            <i class="fa-solid fa-clock text-2xl text-purple-400"></i>
+                    <div class="glass-card p-8 rounded-2xl reveal delay-100 choose-card group">
+                        <div class="w-14 h-14 rounded-xl bg-purple-500/20 flex items-center justify-center mb-6 border border-purple-500/30 group-hover:border-purple-400/50 transition-all">
+                            <i class="fa-solid fa-clock text-2xl text-purple-400 group-hover:text-purple-300 group-hover:shadow-[0_0_20px_rgba(168,85,247,0.5)] transition-all duration-300"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-3">Guaranteed SLAs</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">Defined service level agreements with 99.9% uptime commitment. Rapid deployment cycles with sprint-based delivery, milestone tracking, and penalty clauses ensuring on-time project completion and business continuity.</p>
+                        <h3 class="text-xl font-bold text-white mb-2">⏱ Guaranteed SLAs</h3>
+                        <p class="text-slate-400 text-sm mb-4">Delivery you can plan your business around.</p>
+                        <ul class="text-slate-300 text-sm space-y-2 mb-4">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400 text-xs"></i> 99.9% uptime commitment</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400 text-xs"></i> Sprint-based milestones</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400 text-xs"></i> Penalty-backed SLAs</li>
+                        </ul>
+                        <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                            <span class="text-purple-400 font-semibold text-sm">✔ Zero missed deadlines</span>
+                            <span class="opacity-0 group-hover:opacity-100 text-sm text-white/70 transition-opacity">Learn how →</span>
+                        </div>
                     </div>
 
                     <!-- Feature 3: Reliability -->
-                    <div class="glass-card p-8 rounded-2xl reveal delay-200">
-                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-500/20 to-emerald-600/20 flex items-center justify-center mb-6 border border-emerald-500/20">
-                            <i class="fa-solid fa-shield-check text-2xl text-emerald-400"></i>
+                    <div class="glass-card p-8 rounded-2xl reveal delay-200 choose-card group">
+                        <div class="w-14 h-14 rounded-xl bg-emerald-500/20 flex items-center justify-center mb-6 border border-emerald-500/30 group-hover:border-emerald-400/50 transition-all">
+                            <i class="fa-solid fa-award text-2xl text-emerald-400 group-hover:text-emerald-300 group-hover:shadow-[0_0_20px_rgba(16,185,129,0.5)] transition-all duration-300"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-3">Proven Reliability</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">ISO-certified processes with zero-defect mindset. Comprehensive disaster recovery, redundancy architecture, and 24/7 monitoring ensuring mission-critical systems perform flawlessly under peak load conditions.</p>
+                        <h3 class="text-xl font-bold text-white mb-2">🛡 Proven Reliability</h3>
+                        <p class="text-slate-400 text-sm mb-4">Built for mission-critical systems.</p>
+                        <ul class="text-slate-300 text-sm space-y-2 mb-4">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400 text-xs"></i> Industry best-practice processes</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400 text-xs"></i> 24/7 monitoring</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400 text-xs"></i> Disaster recovery ready</li>
+                        </ul>
+                        <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                            <span class="text-emerald-400 font-semibold text-sm">✔ Zero-defect mindset</span>
+                            <span class="opacity-0 group-hover:opacity-100 text-sm text-white/70 transition-opacity">Learn how →</span>
+                        </div>
                     </div>
 
                     <!-- Feature 4: Legal & IP Protection -->
-                    <div class="glass-card p-8 rounded-2xl reveal">
-                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-pink-500/20 to-pink-600/20 flex items-center justify-center mb-6 border border-pink-500/20">
-                            <i class="fa-solid fa-file-contract text-2xl text-pink-400"></i>
+                    <div class="glass-card p-8 rounded-2xl reveal choose-card group">
+                        <div class="w-14 h-14 rounded-xl bg-pink-500/20 flex items-center justify-center mb-6 border border-pink-500/30 group-hover:border-pink-400/50 transition-all">
+                            <i class="fa-solid fa-file-contract text-2xl text-pink-400 group-hover:text-pink-300 group-hover:shadow-[0_0_20px_rgba(236,72,153,0.5)] transition-all duration-300"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-3">IP-Protected Delivery</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">Comprehensive IP assignment, NDAs, and strict confidentiality protocols. Clean code practices, documented deliverables, and compliance with GDPR, SOC2, HIPAA ensuring legally sound project handovers.</p>
+                        <h3 class="text-xl font-bold text-white mb-2">💼 IP Protection</h3>
+                        <p class="text-slate-400 text-sm mb-4">Your intellectual property stays yours.</p>
+                        <ul class="text-slate-300 text-sm space-y-2 mb-4">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-400 text-xs"></i> Full IP assignment</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-400 text-xs"></i> NDAs & confidentiality</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-400 text-xs"></i> GDPR & SOC2 compliant</li>
+                        </ul>
+                        <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                            <span class="text-pink-400 font-semibold text-sm">✔ Clean code handover</span>
+                            <span class="opacity-0 group-hover:opacity-100 text-sm text-white/70 transition-opacity">Learn how →</span>
+                        </div>
                     </div>
 
-                    <!-- Feature 5: Strategic Consulting -->
-                    <div class="glass-card p-8 rounded-2xl reveal delay-100">
-                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-orange-500/20 to-orange-600/20 flex items-center justify-center mb-6 border border-orange-500/20">
-                            <i class="fa-solid fa-handshake text-2xl text-orange-400"></i>
+                    <!-- Feature 5: Risk Mitigation -->
+                    <div class="glass-card p-8 rounded-2xl reveal delay-100 choose-card group">
+                        <div class="w-14 h-14 rounded-xl bg-cyan-500/20 flex items-center justify-center mb-6 border border-cyan-500/30 group-hover:border-cyan-400/50 transition-all">
+                            <i class="fa-solid fa-scale-balanced text-2xl text-cyan-400 group-hover:text-cyan-300 group-hover:shadow-[0_0_20px_rgba(6,182,212,0.5)] transition-all duration-300"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-3">Strategic Partnership</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">Beyond code—we consult on technology stack decisions, scalability roadmaps, and digital transformation strategies. Dedicated account managers provide executive-level reporting aligning technical milestones with business objectives.</p>
+                        <h3 class="text-xl font-bold text-white mb-2">🛡 Risk Mitigation</h3>
+                        <p class="text-slate-400 text-sm mb-4">Vendor-agnostic solutions that protect you.</p>
+                        <ul class="text-slate-300 text-sm space-y-2 mb-4">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400 text-xs"></i> No vendor lock-in</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400 text-xs"></i> Code escrow arrangements</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400 text-xs"></i> Phased rollouts</li>
+                        </ul>
+                        <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                            <span class="text-cyan-400 font-semibold text-sm">✔ Minimized operational risk</span>
+                            <span class="opacity-0 group-hover:opacity-100 text-sm text-white/70 transition-opacity">Learn how →</span>
+                        </div>
                     </div>
 
-                    <!-- Feature 6: Risk Mitigation -->
-                    <div class="glass-card p-8 rounded-2xl reveal delay-200">
-                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 flex items-center justify-center mb-6 border border-cyan-500/20">
-                            <i class="fa-solid fa-scale-balanced text-2xl text-cyan-400"></i>
+                    <!-- Feature 6: Security & Compliance -->
+                    <div class="glass-card p-8 rounded-2xl reveal delay-200 choose-card group">
+                        <div class="w-14 h-14 rounded-xl bg-teal-500/20 flex items-center justify-center mb-6 border border-teal-500/30 group-hover:border-teal-400/50 transition-all">
+                            <i class="fa-solid fa-lock text-2xl text-teal-400 group-hover:text-teal-300 group-hover:shadow-[0_0_20px_rgba(20,184,166,0.5)] transition-all duration-300"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-3">Risk Mitigation</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">Vendor-agnostic recommendations avoiding lock-in. Code escrow arrangements, comprehensive testing protocols, and phased rollout strategies minimizing operational risk while ensuring seamless integration with existing enterprise systems.</p>
+                        <h3 class="text-xl font-bold text-white mb-2">🔐 Security First</h3>
+                        <p class="text-slate-400 text-sm mb-4">Enterprise-grade security built-in.</p>
+                        <ul class="text-slate-300 text-sm space-y-2 mb-4">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-teal-400 text-xs"></i> Zero-trust architecture</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-teal-400 text-xs"></i> Penetration testing</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-teal-400 text-xs"></i> Continuous compliance</li>
+                        </ul>
+                        <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                            <span class="text-teal-400 font-semibold text-sm">✔ Banking-grade security</span>
+                            <span class="opacity-0 group-hover:opacity-100 text-sm text-white/70 transition-opacity">Learn how →</span>
+                        </div>
                     </div>
+                </div>
+
+                <!-- Soft CTA -->
+                <div class="text-center mt-12 reveal">
+                    <p class="text-slate-400 mb-4">Planning a complex or high-risk project?</p>
+                    <a href="#contact" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-brand-500/50 text-brand-400 font-medium hover:bg-brand-500/20 hover:border-brand-400 hover:text-brand-300 transition-all shadow-[0_0_15px_rgba(99,102,241,0.3)] hover:shadow-[0_0_25px_rgba(99,102,241,0.5)]">
+                        Talk to our solution architects →
+                    </a>
+                    <p class="text-slate-500 text-xs mt-3">Free 30-min consultation</p>
                 </div>
             </div>
         </section>
@@ -437,14 +534,10 @@
             <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-brand-accent/10 to-transparent pointer-events-none"></div>
 
             <div class="container mx-auto px-6 relative z-10">
-                <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
-                    <div class="max-w-2xl">
-                        <h4 class="text-brand-accent font-semibold tracking-wide uppercase mb-2">Our Expertise</h4>
-                        <h2 class="text-3xl lg:text-4xl font-display font-bold text-white">Comprehensive <br><span class="text-gradient">Solutions</span></h2>
-                    </div>
-                    <a href="https://wa.me/9790823800?text=I%20would%20like%20to%20know%20more%20about%20Soft%20Synergy%20Systems%20services" target="_blank" rel="noopener noreferrer" class="hidden md:inline-flex items-center gap-2 text-white font-medium hover:text-brand-accent transition-colors mt-4 md:mt-0">
-                        Contact for More Info <i class="fa-solid fa-arrow-right"></i>
-                    </a>
+                <div class="text-center max-w-4xl mx-auto mb-16 reveal">
+                    <h4 class="text-brand-accent font-semibold tracking-wide uppercase mb-2">Our Expertise</h4>
+                    <h2 class="text-3xl lg:text-4xl font-display font-bold text-white">Comprehensive <span class="text-gradient">Solutions</span></h2>
+                    <p class="text-slate-400 mt-4 text-lg">Delivering end-to-end technology solutions that power your business growth</p>
                 </div>
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -665,26 +758,32 @@
 
                     <!-- Form Side -->
                     <div class="bg-brand-darker p-10 lg:p-16">
-                        <form onsubmit="event.preventDefault(); alert('Thank you! We will contact you shortly.');" class="space-y-6">
+                        <form id="contact-form" onsubmit="return validateForm(event)" class="space-y-6">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                 <div class="space-y-2">
                                     <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">First Name</label>
-                                    <input type="text" class="w-full bg-brand-dark border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all placeholder-slate-600" placeholder="John">
+                                    <input type="text" id="firstName" class="w-full bg-brand-dark border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all placeholder-slate-600" placeholder="John" required>
                                 </div>
                                 <div class="space-y-2">
                                     <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Last Name</label>
-                                    <input type="text" class="w-full bg-brand-dark border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all placeholder-slate-600" placeholder="Doe">
+                                    <input type="text" id="lastName" class="w-full bg-brand-dark border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all placeholder-slate-600" placeholder="Doe" required>
                                 </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Phone Number</label>
+                                <input type="tel" id="phone" class="w-full bg-brand-dark border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all placeholder-slate-600" placeholder="+91 98765-43210">
                             </div>
 
                             <div class="space-y-2">
                                 <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Email</label>
-                                <input type="email" class="w-full bg-brand-dark border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all placeholder-slate-600" placeholder="john@company.com">
+                                <input type="email" id="email" class="w-full bg-brand-dark border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all placeholder-slate-600" placeholder="john@company.com" required>
                             </div>
 
                             <div class="space-y-2">
                                 <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Service Interest</label>
-                                <select class="w-full bg-brand-dark border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all">
+                                <select id="service" class="w-full bg-brand-dark border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all">
+                                    <option value="">Select a Service</option>
                                     <option>AI Solutions</option>
                                     <option>Web Development</option>
                                     <option>Consulting</option>
@@ -694,12 +793,13 @@
 
                             <div class="space-y-2">
                                 <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Message</label>
-                                <textarea rows="4" class="w-full bg-brand-dark border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all placeholder-slate-600" placeholder="Tell us about your project..."></textarea>
+                                <textarea id="message" rows="4" class="w-full bg-brand-dark border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all placeholder-slate-600" placeholder="Tell us about your project..." required></textarea>
                             </div>
 
-                            <button type="submit" class="w-full bg-gradient-to-r from-brand-600 to-brand-accent text-white font-bold py-4 rounded-lg hover:shadow-lg hover:shadow-brand-500/30 transition-all transform hover:-translate-y-1">
+                            <button type="submit" id="submit-btn" class="w-full bg-gradient-to-r from-brand-600 to-brand-accent text-white font-bold py-4 rounded-lg hover:shadow-lg hover:shadow-brand-500/30 transition-all transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed">
                                 Send Message
                             </button>
+                            <p class="text-center text-slate-500 text-xs mt-2"><i class="fa-regular fa-clock mr-1"></i>We respond within 24 business hours</p>
                         </form>
                     </div>
                 </div>
@@ -756,6 +856,9 @@
             <i class="fa-brands fa-whatsapp text-xl md:text-2xl"></i>
         </a>
 
+        <!-- WhatsApp Form Integration -->
+        <script src="form-whatsapp.js"></script>
+        
         <!-- JavaScript logic -->
         <script>
             // --- 1. Mobile Menu Logic ---
@@ -905,9 +1008,13 @@
             initCanvas();
             animateCanvas();
 
-            // --- 4. Toast Notification System removed
+            // --- 4. Toast Notification System removed ---
 
+            // --- 5. Contact Form Validation & WhatsApp Integration ---
         </script>
     </body>
 
 </html>
+
+
+
