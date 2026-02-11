@@ -17,7 +17,7 @@ function validateForm(event) {
     });
     
     // Validate required fields
-    if (!firstName || !lastName || !email || !message) {
+    if (!firstName || !lastName || !phone || !email || !message) {
         alert('Please fill in all the required fields before sending your message.');
         return false;
     }
@@ -26,6 +26,14 @@ function validateForm(event) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
         alert('Please enter a valid email address.');
+        return false;
+    }
+    
+    // Validate phone number format (Indian numbers: 10 digits, optional +91 or 91 prefix)
+    const phoneRegex = /^(\+91|91)?[6-9]\d{9}$/;
+    const phoneDigits = phone.replace(/\D/g, '');
+    if (!phoneRegex.test(phoneDigits)) {
+        alert('Please enter a valid Indian phone number (10 digits).');
         return false;
     }
     
