@@ -1,180 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fullstack Development</title>
-    <link rel="icon" type="image/png" href="/logo.png">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Outfit', 'sans-serif'] },
-                    colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 400: '#38bdf8', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e', dark: '#0f172a', darker: '#020617', accent: '#6366f1' }
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Fullstack Development</title>
+        <link rel="icon" type="image/png" href="/logo.png">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet" crossorigin="anonymous">
+        <script>
+            tailwind.config = {
+                darkMode: 'class',
+                theme: {
+                    extend: {
+                        fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Outfit', 'sans-serif'] },
+                        colors: {
+                            brand: { 50: '#f0f9ff', 100: '#e0f2fe', 400: '#38bdf8', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e', dark: '#0f172a', darker: '#020617', accent: '#6366f1' }
+                        }
                     }
                 }
             }
-        }
-    </script>
-    <style>
-        body { background-color: #020617; color: #f8fafc; }
-        .glass-card { background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); }
-        .text-gradient { background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-    </style>
-</head>
-<body class="antialiased">
-    <!-- Navbar -->
-    <header id="navbar" class="fixed w-full top-0 z-50 border-b border-white/10 bg-brand-darker/90 backdrop-blur-md">
-        <div class="container mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="/" class="flex items-center gap-2">
-                <img src="/logo.png" alt="Soft Synergy Systems" class="h-10 w-auto object-contain">
-                <span class="text-lg font-display font-bold tracking-tight text-white">Soft Synergy</span>
-            </a>
-            <nav class="hidden md:flex items-center gap-6">
-                <a href="/" class="text-sm font-medium text-slate-400 hover:text-white transition-colors">Home</a>
-                <a href="/services.html" class="text-sm font-medium text-brand-400">Services</a>
-                <a href="/#contact" class="px-4 py-2 rounded-full bg-white text-brand-dark font-semibold text-xs">Contact</a>
-            </nav>
-        </div>
-    </header>
+        </script>
+        <style>
+            body {
+                background-color: #020617;
+                color: #f8fafc;
+            }
 
-    <!-- Hero -->
-    <section class="pt-24 pb-12">
-        <div class="container mx-auto px-6">
-            <a href="/services.html" class="text-brand-400 text-sm mb-4 inline-block"><i class="fa-solid fa-arrow-left mr-2"></i>Back to Services</a>
-            <div class="flex items-center gap-4 mb-4">
-                <i class="fa-solid fa-layer-group text-4xl text-purple-500"></i>
-                <h1 class="text-3xl md:text-4xl font-display font-bold text-white">Fullstack Development</h1>
+            .glass-card {
+                background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+                backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+            }
+
+            .text-gradient {
+                background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            ::-webkit-scrollbar {
+                width: 8px;
+            }
+
+            ::-webkit-scrollbar-track {
+                background: #0f172a;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: #334155;
+                border-radius: 4px;
+            }
+        </style>
+    </head>
+
+    <body class="antialiased">
+        <!-- Navbar -->
+        <header id="navbar" class="fixed w-full top-0 z-50 border-b border-white/10 bg-brand-darker/90 backdrop-blur-md">
+            <div class="container mx-auto px-6 h-16 flex items-center justify-between">
+                <a href="/" class="flex items-center gap-2">
+                    <img src="/logo.png" alt="Soft Synergy Systems" class="h-10 w-auto object-contain" width="40" height="40">
+                    <span class="text-lg font-display font-bold tracking-tight text-white">Soft Synergy</span>
+                </a>
+                <nav class="hidden md:flex items-center gap-6">
+                    <a href="/" class="text-sm font-medium text-slate-400 hover:text-white transition-colors">Home</a>
+                    <a href="/services.html" class="text-sm font-medium text-brand-400">Services</a>
+                    <a href="/#contact" class="px-4 py-2 rounded-full bg-white text-brand-dark font-semibold text-xs">Contact</a>
+                </nav>
             </div>
-            <p class="text-slate-400 max-w-3xl">End-to-end web application development from frontend to backend. We build scalable, modern applications using React, Vue, Node.js, Python, and cloud technologies.</p>
-        </div>
-    </section>
+        </header>
 
-    <!-- Content -->
-    <section class="pb-24">
-        <div class="container mx-auto px-6 max-w-4xl">
+        <!-- Hero -->
+        <section class="pt-24 pb-12">
+            <div class="container mx-auto px-6">
+                <a href="/services.html" class="text-brand-400 text-sm mb-4 inline-block"><i class="fa-solid fa-arrow-left mr-2"></i>Back to Services</a>
+                <div class="flex items-center gap-4 mb-4">
+                    <i class="fa-solid fa-layer-group text-4xl text-purple-500"></i>
+                    <h1 class="text-3xl md:text-4xl font-display font-bold text-white">Fullstack Development</h1>
+                </div>
+                <p class="text-slate-400 max-w-3xl">End-to-end web application development from frontend to backend. We build scalable, modern applications using React, Vue, Node.js, Python, and cloud technologies.</p>
+            </div>
+        </section>
 
-            <!-- Frontend -->
-            <div class="mb-12">
-                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><i class="fa-solid fa-palette text-purple-500"></i> Frontend Development</h2>
-                <div class="space-y-4">
+        <!-- Content -->
+        <section class="pb-24">
+            <div class="container mx-auto px-6 max-w-4xl">
+
+                <!-- Frontend -->
+                <div class="mb-12">
+                    <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><i class="fa-solid fa-palette text-purple-500"></i> Frontend Development</h2>
+                    <div class="space-y-4">
+                        <div class="glass-card p-6 rounded-xl">
+                            <h3 class="text-lg font-bold text-purple-400 mb-2">Modern Frameworks</h3>
+                            <p class="text-slate-400 text-sm">React, Next.js, Vue.js, Nuxt.js, Svelte for building responsive, performant user interfaces with component-based architecture.</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-xl">
+                            <h3 class="text-lg font-bold text-purple-400 mb-2">UI/UX Implementation</h3>
+                            <p class="text-slate-400 text-sm">Pixel-perfect implementation of designs with Tailwind CSS, Material-UI, shadcn/ui, and custom design systems.</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-xl">
+                            <h3 class="text-lg font-bold text-purple-400 mb-2">State Management</h3>
+                            <p class="text-slate-400 text-sm">Redux, Zustand, Pinia, Context API for managing complex application states and data flow.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Backend -->
+                <div class="mb-12">
+                    <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><i class="fa-solid fa-server text-purple-500"></i> Backend Development</h2>
                     <div class="glass-card p-6 rounded-xl">
-                        <h3 class="text-lg font-bold text-purple-400 mb-2">Modern Frameworks</h3>
-                        <p class="text-slate-400 text-sm">React, Next.js, Vue.js, Nuxt.js, Svelte for building responsive, performant user interfaces with component-based architecture.</p>
-                    </div>
-                    <div class="glass-card p-6 rounded-xl">
-                        <h3 class="text-lg font-bold text-purple-400 mb-2">UI/UX Implementation</h3>
-                        <p class="text-slate-400 text-sm">Pixel-perfect implementation of designs with Tailwind CSS, Material-UI, shadcn/ui, and custom design systems.</p>
-                    </div>
-                    <div class="glass-card p-6 rounded-xl">
-                        <h3 class="text-lg font-bold text-purple-400 mb-2">State Management</h3>
-                        <p class="text-slate-400 text-sm">Redux, Zustand, Pinia, Context API for managing complex application states and data flow.</p>
+                        <ul class="space-y-2 text-slate-400 text-sm">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-purple-500 mt-1"></i>Node.js & Express APIs</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-purple-500 mt-1"></i>Python & Django/FastAPI</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-purple-500 mt-1"></i>Java & Spring Boot</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-purple-500 mt-1"></i>RESTful & GraphQL APIs</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-purple-500 mt-1"></i>Microservices architecture</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-purple-500 mt-1"></i>WebSocket real-time communication</li>
+                        </ul>
                     </div>
                 </div>
-            </div>
 
-            <!-- Backend -->
-            <div class="mb-12">
-                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><i class="fa-solid fa-server text-purple-500"></i> Backend Development</h2>
-                <div class="glass-card p-6 rounded-xl">
-                    <ul class="space-y-2 text-slate-400 text-sm">
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-purple-500 mt-1"></i>Node.js & Express APIs</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-purple-500 mt-1"></i>Python & Django/FastAPI</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-purple-500 mt-1"></i>Java & Spring Boot</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-purple-500 mt-1"></i>RESTful & GraphQL APIs</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-purple-500 mt-1"></i>Microservices architecture</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-purple-500 mt-1"></i>WebSocket real-time communication</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Database -->
-            <div class="mb-12">
-                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><i class="fa-solid fa-database text-purple-500"></i> Database & Infrastructure</h2>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="glass-card p-5 rounded-xl">
-                        <h3 class="font-bold text-white mb-2">Databases</h3>
-                        <p class="text-slate-400 text-xs">PostgreSQL, MySQL, MongoDB, Redis for optimized data storage and retrieval.</p>
-                    </div>
-                    <div class="glass-card p-5 rounded-xl">
-                        <h3 class="font-bold text-white mb-2">Cloud & DevOps</h3>
-                        <p class="text-slate-400 text-xs">AWS, GCP, Azure, Docker, Kubernetes for scalable deployment.</p>
-                    </div>
-                    <div class="glass-card p-5 rounded-xl">
-                        <h3 class="font-bold text-white mb-2">CI/CD</h3>
-                        <p class="text-slate-400 text-xs">GitHub Actions, GitLab CI, automated testing, deployment pipelines.</p>
-                    </div>
-                    <div class="glass-card p-5 rounded-xl">
-                        <h3 class="font-bold text-white mb-2">Authentication</h3>
-                        <p class="text-slate-400 text-xs">OAuth, JWT, SSO, role-based access control for secure apps.</p>
+                <!-- Database -->
+                <div class="mb-12">
+                    <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><i class="fa-solid fa-database text-purple-500"></i> Database & Infrastructure</h2>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="glass-card p-5 rounded-xl">
+                            <h3 class="font-bold text-white mb-2">Databases</h3>
+                            <p class="text-slate-400 text-xs">PostgreSQL, MySQL, MongoDB, Redis for optimized data storage and retrieval.</p>
+                        </div>
+                        <div class="glass-card p-5 rounded-xl">
+                            <h3 class="font-bold text-white mb-2">Cloud & DevOps</h3>
+                            <p class="text-slate-400 text-xs">AWS, GCP, Azure, Docker, Kubernetes for scalable deployment.</p>
+                        </div>
+                        <div class="glass-card p-5 rounded-xl">
+                            <h3 class="font-bold text-white mb-2">CI/CD</h3>
+                            <p class="text-slate-400 text-xs">GitHub Actions, GitLab CI, automated testing, deployment pipelines.</p>
+                        </div>
+                        <div class="glass-card p-5 rounded-xl">
+                            <h3 class="font-bold text-white mb-2">Authentication</h3>
+                            <p class="text-slate-400 text-xs">OAuth, JWT, SSO, role-based access control for secure apps.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Industry Solutions -->
-            <div class="mb-12">
-                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><i class="fa-solid fa-laptop-code text-purple-500"></i> Solutions We Build</h2>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="glass-card p-5 rounded-xl">
-                        <h3 class="font-bold text-white mb-2">SaaS Platforms</h3>
-                        <p class="text-slate-400 text-xs">Multi-tenant applications with subscription billing, user management, and analytics dashboards.</p>
-                    </div>
-                    <div class="glass-card p-5 rounded-xl">
-                        <h3 class="font-bold text-white mb-2">E-commerce</h3>
-                        <p class="text-slate-400 text-xs">Online stores with payment integration, inventory management, and order processing.</p>
-                    </div>
-                    <div class="glass-card p-5 rounded-xl">
-                        <h3 class="font-bold text-white mb-2">Dashboards</h3>
-                        <p class="text-slate-400 text-xs">Data visualization dashboards with real-time updates and interactive charts.</p>
-                    </div>
-                    <div class="glass-card p-5 rounded-xl">
-                        <h3 class="font-bold text-white mb-2">Marketplaces</h3>
-                        <p class="text-slate-400 text-xs">Multi-vendor platforms with bidding, reviews, and commission systems.</p>
+                <!-- Industry Solutions -->
+                <div class="mb-12">
+                    <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><i class="fa-solid fa-laptop-code text-purple-500"></i> Solutions We Build</h2>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="glass-card p-5 rounded-xl">
+                            <h3 class="font-bold text-white mb-2">SaaS Platforms</h3>
+                            <p class="text-slate-400 text-xs">Multi-tenant applications with subscription billing, user management, and analytics dashboards.</p>
+                        </div>
+                        <div class="glass-card p-5 rounded-xl">
+                            <h3 class="font-bold text-white mb-2">E-commerce</h3>
+                            <p class="text-slate-400 text-xs">Online stores with payment integration, inventory management, and order processing.</p>
+                        </div>
+                        <div class="glass-card p-5 rounded-xl">
+                            <h3 class="font-bold text-white mb-2">Dashboards</h3>
+                            <p class="text-slate-400 text-xs">Data visualization dashboards with real-time updates and interactive charts.</p>
+                        </div>
+                        <div class="glass-card p-5 rounded-xl">
+                            <h3 class="font-bold text-white mb-2">Marketplaces</h3>
+                            <p class="text-slate-400 text-xs">Multi-vendor platforms with bidding, reviews, and commission systems.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Tech Stack -->
-            <div class="mb-12">
-                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><i class="fa-solid fa-layer-group text-purple-500"></i> Tech Stack</h2>
-                <div class="flex flex-wrap gap-2">
-                    <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">React</span>
-                    <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">Next.js</span>
-                    <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">Vue.js</span>
-                    <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">Node.js</span>
-                    <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">Python</span>
-                    <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">PostgreSQL</span>
-                    <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">MongoDB</span>
-                    <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">AWS</span>
-                    <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">Docker</span>
-                    <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">GraphQL</span>
-                    <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">TypeScript</span>
+                <!-- Tech Stack -->
+                <div class="mb-12">
+                    <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><i class="fa-solid fa-layer-group text-purple-500"></i> Tech Stack</h2>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">React</span>
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">Next.js</span>
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">Vue.js</span>
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">Node.js</span>
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">Python</span>
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">PostgreSQL</span>
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">MongoDB</span>
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">AWS</span>
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">Docker</span>
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">GraphQL</span>
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">TypeScript</span>
+                    </div>
                 </div>
+
+                <!-- CTA -->
+                <div class="glass-card p-8 rounded-xl text-center">
+                    <h3 class="text-xl font-bold text-white mb-2">Build Your Next Application</h3>
+                    <p class="text-slate-400 mb-4 text-sm">Let's discuss your fullstack development needs.</p>
+                    <a href="/#contact" class="inline-block px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-purple-500 text-white font-semibold text-sm">Get in Touch</a>
+                </div>
+
             </div>
+        </section>
 
-            <!-- CTA -->
-            <div class="glass-card p-8 rounded-xl text-center">
-                <h3 class="text-xl font-bold text-white mb-2">Build Your Next Application</h3>
-                <p class="text-slate-400 mb-4 text-sm">Let's discuss your fullstack development needs.</p>
-                <a href="/#contact" class="inline-block px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-purple-500 text-white font-semibold text-sm">Get in Touch</a>
+        <!-- Footer -->
+        <footer class="bg-black border-t border-white/5 py-8">
+            <div class="container mx-auto px-6 text-center">
+                <p class="text-slate-600 text-sm">© 2025 Soft Synergy Systems. All rights reserved.</p>
             </div>
+        </footer>
+    </body>
 
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-black border-t border-white/5 py-8">
-        <div class="container mx-auto px-6 text-center">
-            <p class="text-slate-600 text-sm">© 2025 Soft Synergy Systems. All rights reserved.</p>
-        </div>
-    </footer>
-</body>
 </html>

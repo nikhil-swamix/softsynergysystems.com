@@ -1,182 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Java Development</title>
-    <link rel="icon" type="image/png" href="/logo.png">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Outfit', 'sans-serif'] },
-                    colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 400: '#38bdf8', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e', dark: '#0f172a', darker: '#020617', accent: '#6366f1' }
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Java Development</title>
+        <link rel="icon" type="image/png" href="/logo.png">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet" crossorigin="anonymous">
+        <script>
+            tailwind.config = {
+                darkMode: 'class',
+                theme: {
+                    extend: {
+                        fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Outfit', 'sans-serif'] },
+                        colors: {
+                            brand: { 50: '#f0f9ff', 100: '#e0f2fe', 400: '#38bdf8', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e', dark: '#0f172a', darker: '#020617', accent: '#6366f1' }
+                        }
                     }
                 }
             }
-        }
-    </script>
-    <style>
-        body { background-color: #020617; color: #f8fafc; }
-        .glass-card { background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); }
-        .text-gradient { background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-    </style>
-</head>
-<body class="antialiased">
-    <!-- Navbar -->
-    <header id="navbar" class="fixed w-full top-0 z-50 border-b border-white/10 bg-brand-darker/90 backdrop-blur-md">
-        <div class="container mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="/" class="flex items-center gap-2">
-                <img src="/logo.png" alt="Soft Synergy Systems" class="h-10 w-auto object-contain">
-                <span class="text-lg font-display font-bold tracking-tight text-white">Soft Synergy</span>
-            </a>
-            <nav class="hidden md:flex items-center gap-6">
-                <a href="/" class="text-sm font-medium text-slate-400 hover:text-white transition-colors">Home</a>
-                <a href="/services.html" class="text-sm font-medium text-brand-400">Services</a>
-                <a href="/#contact" class="px-4 py-2 rounded-full bg-white text-brand-dark font-semibold text-xs">Contact</a>
-            </nav>
-        </div>
-    </header>
+        </script>
+        <style>
+            body {
+                background-color: #020617;
+                color: #f8fafc;
+            }
 
-    <!-- Hero -->
-    <section class="pt-24 pb-12">
-        <div class="container mx-auto px-6">
-            <a href="/services.html" class="text-brand-400 text-sm mb-4 inline-block"><i class="fa-solid fa-arrow-left mr-2"></i>Back to Services</a>
-            <div class="flex items-center gap-4 mb-4">
-                <i class="fa-brands fa-java text-4xl text-orange-500"></i>
-                <h1 class="text-3xl md:text-4xl font-display font-bold text-white">JAVA Development</h1>
+            .glass-card {
+                background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+                backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+            }
+
+            .text-gradient {
+                background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            ::-webkit-scrollbar {
+                width: 8px;
+            }
+
+            ::-webkit-scrollbar-track {
+                background: #0f172a;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: #334155;
+                border-radius: 4px;
+            }
+        </style>
+    </head>
+
+    <body class="antialiased">
+        <!-- Navbar -->
+        <header id="navbar" class="fixed w-full top-0 z-50 border-b border-white/10 bg-brand-darker/90 backdrop-blur-md">
+            <div class="container mx-auto px-6 h-16 flex items-center justify-between">
+                <a href="/" class="flex items-center gap-2">
+                    <img src="/logo.png" alt="Soft Synergy Systems" class="h-10 w-auto object-contain" width="40" height="40">
+                    <span class="text-lg font-display font-bold tracking-tight text-white">Soft Synergy</span>
+                </a>
+                <nav class="hidden md:flex items-center gap-6">
+                    <a href="/" class="text-sm font-medium text-slate-400 hover:text-white transition-colors">Home</a>
+                    <a href="/services.html" class="text-sm font-medium text-brand-400">Services</a>
+                    <a href="/#contact" class="px-4 py-2 rounded-full bg-white text-brand-dark font-semibold text-xs">Contact</a>
+                </nav>
             </div>
-            <p class="text-slate-400 max-w-3xl">Enterprise-grade Java solutions with outsourcing models and Global Capability Centers delivering scalable, secure, high-performance applications.</p>
-        </div>
-    </section>
+        </header>
 
-    <!-- Content -->
-    <section class="pb-24">
-        <div class="container mx-auto px-6 max-w-4xl">
+        <!-- Hero -->
+        <section class="pt-24 pb-12">
+            <div class="container mx-auto px-6">
+                <a href="/services.html" class="text-brand-400 text-sm mb-4 inline-block"><i class="fa-solid fa-arrow-left mr-2"></i>Back to Services</a>
+                <div class="flex items-center gap-4 mb-4">
+                    <i class="fa-brands fa-java text-4xl text-orange-500"></i>
+                    <h1 class="text-3xl md:text-4xl font-display font-bold text-white">JAVA Development</h1>
+                </div>
+                <p class="text-slate-400 max-w-3xl">Enterprise-grade Java solutions with outsourcing models and Global Capability Centers delivering scalable, secure, high-performance applications.</p>
+            </div>
+        </section>
 
-            <!-- Enterprise Java -->
-            <div class="mb-12">
-                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><i class="fa-solid fa-server text-orange-500"></i> Enterprise Java</h2>
+        <!-- Content -->
+        <section class="pb-24">
+            <div class="container mx-auto px-6 max-w-4xl">
 
-                <div class="space-y-4">
-                    <div class="glass-card p-6 rounded-xl">
-                        <h3 class="text-lg font-bold text-orange-400 mb-2">Spring Boot Microservices</h3>
-                        <p class="text-slate-400 text-sm">Cloud-native microservices with Spring Boot, Spring Cloud, and Kubernetes. Scalable, resilient services handling millions of requests.</p>
-                    </div>
+                <!-- Enterprise Java -->
+                <div class="mb-12">
+                    <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><i class="fa-solid fa-server text-orange-500"></i> Enterprise Java</h2>
 
-                    <div class="glass-card p-6 rounded-xl">
-                        <h3 class="text-lg font-bold text-orange-400 mb-2">Enterprise Applications</h3>
-                        <p class="text-slate-400 text-sm">Large-scale applications using Java EE, Jakarta EE for banking, insurance, and enterprise resource planning.</p>
-                    </div>
+                    <div class="space-y-4">
+                        <div class="glass-card p-6 rounded-xl">
+                            <h3 class="text-lg font-bold text-orange-400 mb-2">Spring Boot Microservices</h3>
+                            <p class="text-slate-400 text-sm">Cloud-native microservices with Spring Boot, Spring Cloud, and Kubernetes. Scalable, resilient services handling millions of requests.</p>
+                        </div>
 
-                    <div class="glass-card p-6 rounded-xl">
-                        <h3 class="text-lg font-bold text-orange-400 mb-2">Legacy Modernization</h3>
-                        <p class="text-slate-400 text-sm">Transform monolithic applications into modern microservices or serverless architectures while maintaining business continuity.</p>
+                        <div class="glass-card p-6 rounded-xl">
+                            <h3 class="text-lg font-bold text-orange-400 mb-2">Enterprise Applications</h3>
+                            <p class="text-slate-400 text-sm">Large-scale applications using Java EE, Jakarta EE for banking, insurance, and enterprise resource planning.</p>
+                        </div>
+
+                        <div class="glass-card p-6 rounded-xl">
+                            <h3 class="text-lg font-bold text-orange-400 mb-2">Legacy Modernization</h3>
+                            <p class="text-slate-400 text-sm">Transform monolithic applications into modern microservices or serverless architectures while maintaining business continuity.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Outsourcing & GCC -->
-            <div class="mb-12">
-                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><i class="fa-solid fa-globe text-orange-500"></i> Outsourcing & GCC</h2>
-                <div class="glass-card p-6 rounded-xl">
-                    <ul class="space-y-2 text-slate-400 text-sm">
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-orange-500 mt-1"></i>Dedicated Development Teams</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-orange-500 mt-1"></i>Staff Augmentation on-demand</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-orange-500 mt-1"></i>Offshore Development Centers</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-orange-500 mt-1"></i>Global Capability Centers (GCCs)</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-orange-500 mt-1"></i>24/7 Development Cycles</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-orange-500 mt-1"></i>Flexible Engagement Models</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Industry Solutions -->
-            <div class="mb-12">
-                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><i class="fa-solid fa-building-columns text-orange-500"></i> Industry Solutions</h2>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="glass-card p-5 rounded-xl">
-                        <h3 class="font-bold text-white mb-2">Banking & Finance</h3>
-                        <p class="text-slate-400 text-xs">High-frequency trading, payment gateways, core banking, Basel III & MiFID II compliance</p>
-                    </div>
-                    <div class="glass-card p-5 rounded-xl">
-                        <h3 class="font-bold text-white mb-2">Insurance</h3>
-                        <p class="text-slate-400 text-xs">Policy administration, claims management, actuarial engines, insurance CRM</p>
-                    </div>
-                    <div class="glass-card p-5 rounded-xl">
-                        <h3 class="font-bold text-white mb-2">Telecommunications</h3>
-                        <p class="text-slate-400 text-xs">BSS/OSS systems, network management, billing, real-time communications</p>
-                    </div>
-                    <div class="glass-card p-5 rounded-xl">
-                        <h3 class="font-bold text-white mb-2">Logistics</h3>
-                        <p class="text-slate-400 text-xs">Fleet management, warehouse automation, route optimization, supply chain visibility</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Security & Performance -->
-            <div class="mb-12">
-                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><i class="fa-solid fa-lock text-orange-500"></i> Security & Performance</h2>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="glass-card p-5 rounded-xl">
-                        <h3 class="font-bold text-white mb-3">Security</h3>
-                        <ul class="space-y-1 text-slate-400 text-xs">
-                            <li>• OWASP best practices</li>
-                            <li>• SAML/OAuth/JWT auth</li>
-                            <li>• PCI DSS, HIPAA, GDPR</li>
-                            <li>• Security audits</li>
-                        </ul>
-                    </div>
-                    <div class="glass-card p-5 rounded-xl">
-                        <h3 class="font-bold text-white mb-3">Performance</h3>
-                        <ul class="space-y-1 text-slate-400 text-xs">
-                            <li>• JVM tuning & GC optimization</li>
-                            <li>• Multi-threading & concurrency</li>
-                            <li>• Caching with Redis, Hazelcast</li>
-                            <li>• Load testing & benchmarking</li>
+                <!-- Outsourcing & GCC -->
+                <div class="mb-12">
+                    <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><i class="fa-solid fa-globe text-orange-500"></i> Outsourcing & GCC</h2>
+                    <div class="glass-card p-6 rounded-xl">
+                        <ul class="space-y-2 text-slate-400 text-sm">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-orange-500 mt-1"></i>Dedicated Development Teams</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-orange-500 mt-1"></i>Staff Augmentation on-demand</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-orange-500 mt-1"></i>Offshore Development Centers</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-orange-500 mt-1"></i>Global Capability Centers (GCCs)</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-orange-500 mt-1"></i>24/7 Development Cycles</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-orange-500 mt-1"></i>Flexible Engagement Models</li>
                         </ul>
                     </div>
                 </div>
-            </div>
 
-            <!-- Tech Stack -->
-            <div class="mb-12">
-                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><i class="fa-solid fa-layer-group text-orange-500"></i> Tech Stack</h2>
-                <div class="flex flex-wrap gap-2">
-                    <span class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-sm border border-orange-500/30">Spring Boot</span>
-                    <span class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-sm border border-orange-500/30">Microservices</span>
-                    <span class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-sm border border-orange-500/30">Hibernate</span>
-                    <span class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-sm border border-orange-500/30">Java EE</span>
-                    <span class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-sm border border-orange-500/30">Maven</span>
-                    <span class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-sm border border-orange-500/30">Gradle</span>
-                    <span class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-sm border border-orange-500/30">Docker</span>
-                    <span class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-sm border border-orange-500/30">Kubernetes</span>
+                <!-- Industry Solutions -->
+                <div class="mb-12">
+                    <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><i class="fa-solid fa-building-columns text-orange-500"></i> Industry Solutions</h2>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="glass-card p-5 rounded-xl">
+                            <h3 class="font-bold text-white mb-2">Banking & Finance</h3>
+                            <p class="text-slate-400 text-xs">High-frequency trading, payment gateways, core banking, Basel III & MiFID II compliance</p>
+                        </div>
+                        <div class="glass-card p-5 rounded-xl">
+                            <h3 class="font-bold text-white mb-2">Insurance</h3>
+                            <p class="text-slate-400 text-xs">Policy administration, claims management, actuarial engines, insurance CRM</p>
+                        </div>
+                        <div class="glass-card p-5 rounded-xl">
+                            <h3 class="font-bold text-white mb-2">Telecommunications</h3>
+                            <p class="text-slate-400 text-xs">BSS/OSS systems, network management, billing, real-time communications</p>
+                        </div>
+                        <div class="glass-card p-5 rounded-xl">
+                            <h3 class="font-bold text-white mb-2">Logistics</h3>
+                            <p class="text-slate-400 text-xs">Fleet management, warehouse automation, route optimization, supply chain visibility</p>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Security & Performance -->
+                <div class="mb-12">
+                    <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><i class="fa-solid fa-lock text-orange-500"></i> Security & Performance</h2>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="glass-card p-5 rounded-xl">
+                            <h3 class="font-bold text-white mb-3">Security</h3>
+                            <ul class="space-y-1 text-slate-400 text-xs">
+                                <li>• OWASP best practices</li>
+                                <li>• SAML/OAuth/JWT auth</li>
+                                <li>• PCI DSS, HIPAA, GDPR</li>
+                                <li>• Security audits</li>
+                            </ul>
+                        </div>
+                        <div class="glass-card p-5 rounded-xl">
+                            <h3 class="font-bold text-white mb-3">Performance</h3>
+                            <ul class="space-y-1 text-slate-400 text-xs">
+                                <li>• JVM tuning & GC optimization</li>
+                                <li>• Multi-threading & concurrency</li>
+                                <li>• Caching with Redis, Hazelcast</li>
+                                <li>• Load testing & benchmarking</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tech Stack -->
+                <div class="mb-12">
+                    <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><i class="fa-solid fa-layer-group text-orange-500"></i> Tech Stack</h2>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-sm border border-orange-500/30">Spring Boot</span>
+                        <span class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-sm border border-orange-500/30">Microservices</span>
+                        <span class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-sm border border-orange-500/30">Hibernate</span>
+                        <span class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-sm border border-orange-500/30">Java EE</span>
+                        <span class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-sm border border-orange-500/30">Maven</span>
+                        <span class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-sm border border-orange-500/30">Gradle</span>
+                        <span class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-sm border border-orange-500/30">Docker</span>
+                        <span class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-sm border border-orange-500/30">Kubernetes</span>
+                    </div>
+                </div>
+
+                <!-- CTA -->
+                <div class="glass-card p-8 rounded-xl text-center">
+                    <h3 class="text-xl font-bold text-white mb-2">Scale Your Java Development</h3>
+                    <p class="text-slate-400 mb-4 text-sm">Let's discuss your enterprise Java requirements.</p>
+                    <a href="/#contact" class="inline-block px-6 py-3 rounded-full bg-gradient-to-r from-orange-600 to-orange-500 text-white font-semibold text-sm">Get in Touch</a>
+                </div>
+
             </div>
+        </section>
 
-            <!-- CTA -->
-            <div class="glass-card p-8 rounded-xl text-center">
-                <h3 class="text-xl font-bold text-white mb-2">Scale Your Java Development</h3>
-                <p class="text-slate-400 mb-4 text-sm">Let's discuss your enterprise Java requirements.</p>
-                <a href="/#contact" class="inline-block px-6 py-3 rounded-full bg-gradient-to-r from-orange-600 to-orange-500 text-white font-semibold text-sm">Get in Touch</a>
+        <!-- Footer -->
+        <footer class="bg-black border-t border-white/5 py-8">
+            <div class="container mx-auto px-6 text-center">
+                <p class="text-slate-600 text-sm">© 2025 Soft Synergy Systems. All rights reserved.</p>
             </div>
+        </footer>
+    </body>
 
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-black border-t border-white/5 py-8">
-        <div class="container mx-auto px-6 text-center">
-            <p class="text-slate-600 text-sm">© 2025 Soft Synergy Systems. All rights reserved.</p>
-        </div>
-    </footer>
-</body>
 </html>
