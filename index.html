@@ -58,8 +58,18 @@
     </script>
 
     <style>
+        /* CSS Reset for proper scaling */
+        html {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         /* Custom Styles & Utilities */
         body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             background-color: #020617;
             color: #f8fafc;
             overflow-x: hidden;
@@ -521,25 +531,7 @@
                                 </div>
                             </div>
 
-                            <div class="glass-card rounded-xl p-4 border border-white/10"
-                                style="background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.005) 100%); backdrop-filter: blur(10px);">
-                                <h5 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
-                                    <i class="fa-solid fa-info-circle text-brand-400"></i> Company Details
-                                </h5>
-                                <div class="space-y-2 text-sm">
-                                    <div class="flex items-center gap-2">
-                                        <i class="fa-solid fa-location-dot text-brand-400 w-4"></i>
-                                        <span class="text-slate-500">HQ:</span>
-                                        <span id="headquarters" class="text-slate-300">Nagavarapalya, Bangalore, Karnataka,
-                                            India</span>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <i class="fa-solid fa-id-card text-brand-400 w-4"></i>
-                                        <span class="text-slate-500">CIN:</span>
-                                        <span id="cin" class="text-slate-400 font-mono text-xs">U72900KA2022PTC163558</span>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
 
@@ -549,7 +541,7 @@
                         <div class="glass-card rounded-xl p-4 border border-white/10"
                             style="background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.005) 100%); backdrop-filter: blur(10px);">
                             <h5 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
-                                <i class="fa-solid fa-building text-brand-400"></i> About the Company
+                                <i class="fa-solid fa-building text-brand-400"></i> About the Strategic Collaboration
                             </h5>
                             <p id="full-description" class="text-slate-400 leading-relaxed text-sm">
                                 Sri Saraswathi Artificial Intelligence and Robotics Private Limited is an advanced AI
@@ -1264,8 +1256,6 @@
         document.getElementById('founder-image').alt = strategicPartner.founder.name;
 
         document.getElementById('full-description').textContent = strategicPartner.fullDescription;
-        document.getElementById('headquarters').textContent = strategicPartner.headquarters;
-        document.getElementById('cin').textContent = strategicPartner.cin;
 
         const highlightsContainer = document.getElementById('highlights-container');
         highlightsContainer.innerHTML = '';

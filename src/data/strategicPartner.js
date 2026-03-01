@@ -1,56 +1,60 @@
 /**
  * Strategic Partner Data
- * Sri Saraswathi Artificial Intelligence and Robotics Private Limited
+ * Soft Synergy Systems Pvt Ltd
  */
 
 export const strategicPartner = {
-  badge: "New Strategic Partner",
+  badge: "Key Defence Technology & AI Systems Leader",
 
-  companyName:
-    "Sri Saraswathi Artificial Intelligence and Robotics Private Limited",
+  companyName: "Soft Synergy Systems Pvt Ltd",
 
-  shortDescription:
-    "A Bangalore-based AI and Robotics company specializing in Defence, Embedded Systems, and Advanced Automation Technologies.",
+  shortDescription: "A premier IT services and technology solutions company specializing in Defence AI Systems, Embedded Technologies, and Advanced Software Development.",
 
-  fullDescription:
-    "Sri Saraswathi Artificial Intelligence and Robotics Private Limited is an advanced AI and Robotics organization founded in 2022. The company focuses on Defence technologies, missile simulation systems, pilot advisory software, embedded AI hardware integration, and intelligent automation solutions across aerospace, industrial, and national security sectors.",
+  fullDescription: "Mr. Dadireddy Srinivasulu Reddy is Working at Soft Synergy Systems Pvt Ltd as a Senior Defence & AI Systems Expert, bringing extensive experience in missile simulation, pilot advisory systems, guidance and control engineering, autopilot design, and embedded AI technologies. His deep expertise in defence automation and mission-critical software development strengthens our technical capabilities, while Soft Synergy Systems provides the advanced AI integration, research infrastructure, and strategic development support needed to deliver next-generation defence and intelligent automation solutions.",
 
   founder: {
     name: "Mr. Dadireddy Srinivasulu Reddy",
-    title: "Founder & Director",
-    designation: "Scientist – DRDO, India",
+    title: "Senior Defence & AI Systems Expert",
+    designation: "Defence Technology & AI Systems Leader",
+    company: "Soft Synergy Systems Pvt Ltd",
     image: "../assets/Dadireddy Srinivasulu Reddy .jpg"
   },
 
+  expertise: [
+    "Missile Simulation & Analysis",
+    "Pilot Advisory Systems (DLZ)",
+    "Guidance & Control Systems",
+    "Autopilot Design",
+    "Embedded AI Hardware & Software",
+    "Defence Safety & Range Safety Systems"
+  ],
+
   highlights: [
     "Defence AI Systems",
-    "Embedded Intelligence",
-    "Robotics Automation"
+    "Missile Technology",
+    "Aviation Safety Systems"
   ],
 
   coreExpertise: [
-    "Missile Systems Simulation & Analysis",
-    "Pilot Advisory Software for Fighter Aircraft",
-    "AI & Machine Learning Systems",
+    "Missile Simulation & Analysis",
+    "Pilot Advisory Systems (DLZ)",
+    "Guidance & Control Systems",
+    "Autopilot Design",
     "Embedded AI Hardware & Software",
-    "Robotics & Automation Solutions",
+    "Defence Safety & Range Safety Systems",
+    "AI & Machine Learning Systems",
     "Defence Automation Technologies"
   ],
 
   certifications: [
-    { name: "Startup India Certified", color: "green" },
-    { name: "ISO 9001:2015 Certified", color: "blue" },
-    { name: "MSME Registered", color: "purple" }
+    { name: "ISO Certified", color: "green" },
+    { name: "Startup India Certified", color: "blue" }
   ],
 
   divisions: [
-    "Defence Division",
-    "Embedded Division",
-    "Software Division",
-    "Robotics Division"
-  ],
-
-  headquarters: "Nagavarapalya, Bangalore, Karnataka, India",
-
-  cin: "U72900KA2022PTC163558"
+    "Defence Technology Division",
+    "AI Systems Division",
+    "Embedded Systems Division",
+    "Software Development Division"
+  ]
 };
